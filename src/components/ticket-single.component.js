@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 
 
-export default class Contact extends Component {
+export default class GetTickets extends Component {
     /* constructor(props) {
          super(props);
  
@@ -18,11 +18,11 @@ export default class Contact extends Component {
             <div className="row h-100 align-items-center">
                 <div className="col-12">
                     <div className="breadcrumb-content">
-                        <h2 className="page-title">Contact</h2>
+                        <h2 className="page-title">Get Tickets</h2>
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item"><Link to="/">Home</Link></li>
-                                <li className="breadcrumb-item active" aria-current="page">Contact</li>
+                                <li className="breadcrumb-item active" aria-current="page">Get tickets</li>
                             </ol>
                         </nav>
                     </div>
@@ -46,8 +46,8 @@ export default class Contact extends Component {
                     <div className="contact_from_area mb-100 clearfix">
                         
                         <div className="contact-heading">
-                            <h4>Contact us</h4>
-                            <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae</p>
+                            <h4>Your Ticket</h4>
+                            <p>Send us your details and we will reach out to you</p>
                         </div>
                         <div className="contact_form">
                             <form >
@@ -74,7 +74,7 @@ export default class Contact extends Component {
                                        
                                         <div className="col-12 col-lg-6">
                                             <div className="form-group">
-                                                <input type="text" className="form-control mb-30" name="subject" id="subject" placeholder="Your Number"/>
+                                                <input type="text" className="form-control mb-30" name="subject" id="subject" placeholder="Your Phone Number" required/>
                                             </div>
                                         </div>
                                         

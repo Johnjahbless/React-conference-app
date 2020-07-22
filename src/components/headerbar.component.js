@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import jQuery from 'jquery';
 
 
 
@@ -10,48 +11,136 @@ export default class Headerbar extends Component {
      } */
 
 
+    componentDidMount() {
+        (function ($) {
+            $.fn.classyNav = function (options) {
+        
+                // Variables
+                var navContainer = $('.classy-nav-container');
+                var classy_nav = $('.classynav ul');
+                var classy_navli = $('.classynav > ul > li');
+                var navbarToggler = $('.classy-navbar-toggler');
+                var closeIcon = $('.classycloseIcon');
+                var navToggler = $('.navbarToggler');
+                var classyMenu = $('.classy-menu');
+                var var_window = $(window);
+        
+                // default options
+                var defaultOpt = $.extend({
+                    breakpoint: 991,
+                    openCloseSpeed: 500,
+                    megaopenCloseSpeed: 800
+                }, options);
+        
+                return this.each(function () {
+        
+                    // navbar toggler
+                    navbarToggler.on('click', function () {
+                        navToggler.toggleClass('active');
+                        classyMenu.toggleClass('menu-on');
+                    });
+        
+                    // close icon
+                    closeIcon.on('click', function () {
+                        classyMenu.removeClass('menu-on');
+                        navToggler.removeClass('active');
+                    });
+        
+                    // add dropdown & megamenu class in parent li class
+                    classy_navli.has('.dropdown').addClass('cn-dropdown-item');
+                    classy_navli.has('.megamenu').addClass('megamenu-item');
+        
+                    // adds toggle button to li items that have children
+                    classy_nav.find('li a').each(function () {
+                        if ($(this).next().length > 0) {
+                            $(this).parent('li').addClass('has-down').append('<span class="dd-trigger"></span>');
+                        }
+                    });
+        
+                    // expands the dropdown menu on each click
+                    classy_nav.find('li .dd-trigger').on('click', function (e) {
+                        e.preventDefault();
+                        $(this).parent('li').children('ul').stop(true, true).slideToggle(defaultOpt.openCloseSpeed);
+                        $(this).parent('li').toggleClass('active');
+                    });
+        
+                    // add padding in dropdown & megamenu item
+                    $('.megamenu-item').removeClass('has-down');
+        
+                    // expands the megamenu on each click
+                    classy_nav.find('li .dd-trigger').on('click', function (e) {
+                        e.preventDefault();
+                        $(this).parent('li').children('.megamenu').slideToggle(defaultOpt.megaopenCloseSpeed);
+                    });
+        
+                    // check browser width in real-time
+                    function breakpointCheck() {
+                        var windoWidth = window.innerWidth;
+                        if (windoWidth <= defaultOpt.breakpoint) {
+                            navContainer.removeClass('breakpoint-off').addClass('breakpoint-on');
+                        } else {
+                            navContainer.removeClass('breakpoint-on').addClass('breakpoint-off');
+                        }
+                    }
+        
+                    breakpointCheck();
+        
+                    var_window.on('resize', function () {
+                        breakpointCheck();
+                    });
+        
+                    // sidebar menu enable
+                    if (defaultOpt.sideMenu === true) {
+                        navContainer.addClass('sidebar-menu-on').removeClass('breakpoint-off');
+                    }
+                });
+            };
+            
+        }(jQuery));
+    }
+
      render() {
         return (
             <>
             <div id="preloader">
-        <div class="loader"></div>
+        <div className="loader"></div>
     </div>
    
    
-    <header class="header-area">
-        <div class="classy-nav-container breakpoint-off">
-            <div class="container">
+    <header className="header-area">
+        <div className="classy-nav-container breakpoint-off">
+            <div className="container">
                
-                <nav class="classy-navbar justify-content-between" id="conferNav">
+                <nav className="classy-navbar justify-content-between" id="conferNav">
 
                    
-                    <Link class="nav-brand" to="/"><img src="./img/core-img/logo.png" alt=""/></Link>
+                    <Link className="nav-brand" to="/"><img src="./img/core-img/logo.png" alt=""/></Link>
 
                     
-                    <div class="classy-navbar-toggler">
-                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    <div className="classy-navbar-toggler">
+                        <span className="navbarToggler"><span></span><span></span><span></span></span>
                     </div>
 
                     
-                    <div class="classy-menu">
+                    <div className="classy-menu">
                         
-                        <div class="classycloseIcon">
-                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        <div className="classycloseIcon">
+                            <div className="cross-wrap"><span className="top"></span><span className="bottom"></span></div>
                         </div>
                        
-                        <div class="classynav">
+                        <div className="classynav">
                             <ul id="nav">
-                                <li class="active"><Link to="/">Home</Link></li>
+                                <li className="active"><Link to="/">Home</Link></li>
                                
                                 <li><Link to="/speakers">Speakears</Link></li>
-                                <li><Link to="/schedule">Schedule</Link></li>
+                                <li><Link to="/shedule">Schedule</Link></li>
                                 <li><Link to="/blog">Blog</Link></li>
                                 <li><Link to="/about">About Us</Link></li>
                                 <li><Link to="/contact">Contact</Link></li>
                             </ul>
 
                            
-                            <a href="/tickets" class="btn confer-btn mt-3 mt-lg-0 ml-3 ml-lg-5">Get Tickets <i class="zmdi zmdi-long-arrow-right"></i></a>
+                            <Link to="/tickets" className="btn confer-btn mt-3 mt-lg-0 ml-3 ml-lg-5">Get Tickets <i className="zmdi zmdi-long-arrow-right"></i></Link>
                         </div>
                         
                     </div>
