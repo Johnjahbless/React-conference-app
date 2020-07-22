@@ -52,5 +52,28 @@
     <script src="%PUBLIC_URL%/js/confer.bundle.js"></script>
     <!-- Active -->
     <script src="%PUBLIC_URL%/js/default-assets/active.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyB16348zg_hQxdlqg6E_nxT1n9_AeDOEyM",
+    authDomain: "confer-24b29.firebaseapp.com",
+    databaseURL: "https://confer-24b29.firebaseio.com",
+    projectId: "confer-24b29",
+    storageBucket: "confer-24b29.appspot.com",
+    messagingSenderId: "622421597936",
+    appId: "1:622421597936:web:4a5838380e1854d1366c35",
+    measurementId: "G-HL8PF11JJR"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
   </body>
 </html>
