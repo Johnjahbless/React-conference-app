@@ -1,13 +1,46 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 
 export default class Reseachers extends Component {
-    /* constructor(props) {
+     constructor(props) {
          super(props);
+         this.handleImageUpload = this.handleImageUpload.bind(this);
+
+         this.state = {
+            name: '',
+            progress: 0,
+        }
  
-     } */
+     } 
+
+     handleImageUpload(e) {
+        this.setState({loading: true, error: ''})
+       const { files } = document.querySelector('input[type="file"]')
+       const formData = new FormData();
+       formData.append('file', files[0]);
+       // replace this with your upload preset name
+       formData.append('school', 'ibbuiceel');
+       formData.append('type', 'credentials');
+       formData.append('name', 'john.jpg');
+       const options = {
+         method: 'POST',
+         body: formData
+       };
+       
+       return fetch('http://localhost:5000/upload', options)
+       .then(res => res.json())
+         .then(res => {
+           console.log(res)
+            const details = { image: res.data.path, loading: false}
+
+	//axios.post(`${data.host}api/v1/applicant/update/image?token=${data.token}`, details)
+	 // .then(res => this.setState({ loading:false, image: details.image })).catch(err => this.setState({ loading:false, error: err.toString() }));
+    
+           }).catch(err => this.setState({loading: false, error: err.toString()}));
+      }
 
 
      render() {
@@ -921,7 +954,13 @@ export default class Reseachers extends Component {
                                                 <input type="text" className="form-control mb-30" name="subject" id="subject" placeholder="Your Phhone Number" required/>
                                             </div>
                                         </div>
-                                       
+                                        <div className="col-12">
+                                            <div className="form-group">
+                                            <input name="image" id="image" type="file" style={{ display: "none" }} onChange={this.handleImageUpload} className="form-control" accept="image/png, image/jpeg" />
+												<label htmlFor="image" style={{marginLeft: "70px"}}><i className="fa fa-camera"></i></label>
+                  
+                                            </div>
+                                        </div>
                                         <div className="col-12">
                                             <div className="form-group">
                                                 <textarea name="message" className="form-control mb-30" id="message" cols="30" rows="6" placeholder="Your Message *"></textarea>
